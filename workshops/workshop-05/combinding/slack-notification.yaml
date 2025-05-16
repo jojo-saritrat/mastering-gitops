@@ -1,0 +1,24 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  generateName: app-slack-notification-
+  annotations:
+    argocd.argoproj.io/hook: PostSync
+    argocd.argoproj.io/hook-delete-policy: HookSucceeded
+spec:
+  template:
+    spec:
+      containers:
+        - name: slack-notification
+          image: curlimages/curl
+          command:
+            - curl
+            - '-X'
+            - POST
+            - '--data-urlencode'
+            - >-
+              payload={"channel": "#somechannel", "username": "hello", "text":
+              "App Sync succeeded", "icon_emoji": ":ghost:"}
+            - 'https://hooks.slack.com/services/...'
+      restartPolicy: Never
+  backoffLimit: 2

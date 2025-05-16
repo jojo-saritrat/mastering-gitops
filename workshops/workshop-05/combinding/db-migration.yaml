@@ -1,0 +1,28 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: db-migrate
+  annotations:
+    argocd.argoproj.io/hook: PreSync
+    argocd.argoproj.io/hook-delete-policy: HookSucceeded
+    argocd.argoproj.io/sync-wave: '-1'
+spec:
+  ttlSecondsAfterFinished: 360
+  template:
+    spec:
+      containers:
+        - name: postgresql-client
+          image: 'my-postgres-data:11.5'
+          imagePullPolicy: Always
+          env:
+            - name: PGPASSWORD
+              value: admin
+            - name: POSTGRES_HOST
+              value: my_postgresql_db
+          command:
+            - psql
+            - '-h=my_postgresql_db'
+            - '-U postgres'
+            - '-f preload.sql'
+      restartPolicy: Never
+  backoffLimit: 1

@@ -1,0 +1,7 @@
+spec:
+  syncPolicy:
+    automated:
+      enabled: false
+      prune: true
+      allowEmpty: true
+      selfHeal: true

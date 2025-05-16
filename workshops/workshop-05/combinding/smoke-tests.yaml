@@ -1,0 +1,24 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: smoke-tests
+  annotations:
+    argocd.argoproj.io/hook: PostSync
+    argocd.argoproj.io/hook-delete-policy: HookSucceeded
+    argocd.argoproj.io/sync-wave: '5'
+spec:
+  ttlSecondsAfterFinished: 120
+  template:
+    spec:
+      containers:
+        - name: java-int-tests
+          image: 'my-maven-image:3.5.2'
+          imagePullPolicy: Always
+          env:
+            - name: MAVEN_OPTS
+              value: '-Xmx2048m'
+          command:
+            - mvn
+            - verify
+      restartPolicy: Never
+  backoffLimit: 1
