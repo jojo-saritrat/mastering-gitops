@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: team-revenue
+  namespace: argocd
+
+spec:
+  description: Team with developers for Revenue
+
+  sourceRepos:
+  - "https://github.com/acme/revenue/*"
+
+  destinations:
+  - namespace: "revenue"
+    server: https://kubernetes.default.svc
+
+
+  clusterResourceBlacklist:
+  - group: ""
+    kind: "Namespace"
+
+  namespaceResourceBlacklist:
+  - group: ""
+    kind: "ResourceQuota"
+  - group: "networking.k8s.io"
+    kind: "NetworkPolicy"

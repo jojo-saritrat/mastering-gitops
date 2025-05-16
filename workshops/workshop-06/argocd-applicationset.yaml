@@ -1,0 +1,24 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: wallet
+spec:
+  generators:
+    - list:
+        elements:
+          - cluster: dev
+            url: 'https://kubernetes.default.svc'
+          - cluster: sit
+            url: 'https://kubernetes.default.svc'
+  template:
+    metadata:
+      name: '{{cluster}}-wallet'
+    spec:
+      project: default
+      source:
+        repoURL: 'https://github.com/jumpbox-academy/nonprod-k8s-manifests.git'
+        targetRevision: HEAD
+        path: 'nonprod/{{cluster}}/wallet'
+      destination:
+        server: '{{url}}'
+        namespace: wallet

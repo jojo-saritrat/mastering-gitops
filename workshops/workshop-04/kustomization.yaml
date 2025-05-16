@@ -1,0 +1,38 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+configMapGenerator:
+################# Payment #################
+- name: keystore
+  namespace: nongped
+  files:
+  - .keystore=payment/.keystore
+- name: payment-crt
+  namespace: nongped
+  files:
+  - payment.crt=payment/payment.crt
+- name: payment-key
+  namespace: nongped
+  files:
+  - payment.key=payment/payment.key
+- name: payment
+  namespace: nongped
+  files:
+  - appsettings.json=payment/payment.json
+
+################# order #################
+- name: order
+  namespace: nongped
+  files:
+  - application.properties=order/order.properties
+
+################# cart #################
+- name: cart
+  namespace: nongped
+  envs: 
+  - ./common/common.env
+  - ./cart/cart.env
+
+# Generator Option
+generatorOptions:
+  disableNameSuffixHash: true

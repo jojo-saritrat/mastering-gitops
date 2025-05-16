@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: argocd-notifications-cm
+  namespace: argocd
+data:
+  trigger.sync-operation-change: |
+
+
+
+
+
+
+  template.trigger-webhook: |
