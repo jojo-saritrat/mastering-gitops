@@ -5,7 +5,6 @@ metadata:
 spec:
   destination:
     server: https://kubernetes.default.svc
-    namespace: some-namespace
   syncPolicy:
     syncOptions:
     - CreateNamespace=true
