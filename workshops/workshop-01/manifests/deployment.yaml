@@ -13,7 +13,7 @@ spec:
         app: simple-deploy
     spec:
       containers:
-      - image: nginx
-        name: nginx
-        ports:
-        - containerPort: 8080
+        - image: abc
+          name: nginx
+          ports:
+            - containerPort: 80
