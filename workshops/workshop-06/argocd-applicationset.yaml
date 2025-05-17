@@ -16,7 +16,7 @@ spec:
     spec:
       project: default
       source:
-        repoURL: 'https://github.com/jumpbox-academy/nonprod-k8s-manifests.git'
+        repoURL: 'https://github.com/jojo-saritrat/nonprod-k8s-manifests.git'
         targetRevision: HEAD
         path: 'nonprod/{{cluster}}/wallet'
       destination:
