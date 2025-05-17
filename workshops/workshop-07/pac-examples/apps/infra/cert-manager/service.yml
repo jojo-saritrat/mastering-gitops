@@ -5,8 +5,8 @@ metadata:
 spec:
   type: ClusterIP
   selector:
-    app: trivial-go-web-app
+    app: cert-manager
   ports:
     - protocol: TCP
-      port: 80
+      port: 8080
       targetPort: 8080

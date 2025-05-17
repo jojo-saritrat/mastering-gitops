@@ -8,7 +8,7 @@ spec:
   goTemplateOptions: ["missingkey=error"]
   generators:
   - git:
-      repoURL: https://github.com/kostis-codefresh/intro-argocd-rbac.git
+      repoURL: https://github.com/jojo-saritrat/argocd-rbac.git
       revision: HEAD
       directories:
       - path: apps/*/*
@@ -20,7 +20,7 @@ spec:
       project: '{{index .path.segments 1}}'
 
       source:
-        repoURL: https://github.com/kostis-codefresh/intro-argocd-rbac.git
+        repoURL: https://github.com/jojo-saritrat/argocd-rbac.git
         targetRevision: HEAD
         path: '{{.path.path}}'
       

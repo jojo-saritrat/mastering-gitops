@@ -2,19 +2,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: simple-deployment
+  name: sealed-secrets
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: trivial-go-web-app
+      app: sealed-secrets
   template:
     metadata:
       labels:
-        app: trivial-go-web-app
+        app: sealed-secrets
     spec:
       containers:
       - name: webserver-simple
-        image: docker.io/kostiscodefresh/gitops-simple-app:v1.0
+        image: nginx
         ports:
-        - containerPort: 8080
+        - containerPort: 80
